@@ -5,10 +5,10 @@
     <title>Formulaire</title>
 </head>
 <body>
-    <form action="index.php" method="POST">
+    <form action="../../../index.php" method="POST">
         <input type="email" name="email" placeholder="email">
         <input type="password" name="password" placeholder="password">
         <button type="submit">Go</button>
     </form>
 </body>
-</html> 
+</html>
