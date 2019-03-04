@@ -5,7 +5,7 @@ use Core\Controller;
 
 class UserController extends Controller{
     public function indexAction(){
-        echo 'ici cest le user index';
+        echo 'User controller IndexAction';
     }
     public function addAction(){
         echo "add" ;

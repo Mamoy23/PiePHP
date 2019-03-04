@@ -7,6 +7,10 @@ use Core\Controller;
 class AppController extends Controller{
 
     public function indexAction(){
-        echo 'AppController indexAction \n';
+        echo 'AppController indexAction';
+    }
+
+    public function testAction(){
+        echo 'AppController testAction';
     }
 }
