@@ -2,13 +2,16 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Formulaire</title>
+    <title>Connexion</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-    <form action="../../../index.php" method="POST">
-        <input type="email" name="email" placeholder="email">
-        <input type="password" name="password" placeholder="password">
-        <button type="submit">Go</button>
+    <h1>Connexion</h1>
+    <form action="login" method="POST">
+        <input type="email" name="co_email" placeholder="email">
+        <input type="password" name="co_password" placeholder="password">
+        <button type="submit">Se connecter</button>
     </form>
 </body>
 </html>
