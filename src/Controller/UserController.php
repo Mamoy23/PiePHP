@@ -6,27 +6,31 @@ use \Model\UserModel;
 
 class UserController extends Controller{
 
-    //private $id;
-
+    public function __construct(){
+        $this->request = new \Core\Request;
+    }
+    
     public function indexAction() {
         $this->render('index');
     }
     public function addAction(){
         $this->render('register');
-        if(isset($_POST['email']) && !empty($_POST['email'])
-        && isset($_POST['password']) && !empty($_POST['password'])){
+        $request = $this->request->getParams();
+        if(isset($request['email']) && !empty($request['email'])
+        && isset($request['password']) && !empty($request['password'])){
             $app = new \Model\UserModel;
-            $id = $app->save($_POST['email'], $_POST['password']);
+            $app->save();
             $this->render('show');
         }
     }
     
     public function loginAction() {
         $this->render('login');
-        if(isset($_POST['co_email']) && !empty($_POST['co_email'])
-        && isset($_POST['co_password']) && !empty($_POST['co_password'])){
+        $request = $this->request->getParams();
+        if(isset($request['co_email']) && !empty($request['co_email'])
+        && isset($request['co_password']) && !empty($request['co_password'])){
             $app = new \Model\UserModel;
-            $result = $app->login($_POST['co_email'], $_POST['co_password']);
+            $result = $app->login($request['co_email'], $request['co_password']);
             echo 'co ok';
             $this->render('show');
         }

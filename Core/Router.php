@@ -17,9 +17,11 @@ class Router {
     // + le controller a instancier
     // + la méthode du controller a appeler
     // + un tableau contenant les paramètres à passer à la méthode du controller
-        if(isset(self::$routes[$url]))
-        return self::$routes[$url];
-        else
-        require_once 'src/View/Error/404.php';
+        if(isset(self::$routes[$url])){
+            return self::$routes[$url];
+        }
+        else{
+            $routes = null;
+        }
     }
 }

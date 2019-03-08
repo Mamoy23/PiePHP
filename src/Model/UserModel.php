@@ -6,6 +6,7 @@ class UserModel{
     private $bdd;
     private $email;
     private $password;
+    private $table;
     //private $id;
 
     public function __construct(){
@@ -15,15 +16,18 @@ class UserModel{
         } catch (Exception $e) {
         var_dump($e);
         }
+        $this->request = new \Core\Request;
+        $this->table = 'users';
+
     }
 
-    public function save($email, $password) {
-        $query = "INSERT INTO users (email, password) VALUES (:email, :password)";
-        $stmt = $this->bdd->prepare($query);
-        $stmt->bindValue('email', $email);
-        $stmt->bindValue('password', $password);
-        $stmt->execute();
-        return $id = $this->bdd->lastInsertId();
+    public function save() {
+        $request = $this->request->getParams();
+        $app = new \Core\ORM;
+        $app->create($this->table, array(
+            'email' => $request['email'],
+            'password' => $request['password'])
+            );
     }
 
     public function login($email, $password){

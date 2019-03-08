@@ -38,8 +38,8 @@ class Core {
 
         $url = substr($_SERVER['REQUEST_URI'], 11);
         $routes = Router::get($url);
-        
-        if(!empty($routes)){
+        //var_dump($routes[$url]);
+        if($routes != null){
             $className = 'Controller\\'.ucfirst($routes['controller']).'Controller';
             $methodName = $routes['action'].'Action';
             if(class_exists($className)){
@@ -48,15 +48,15 @@ class Core {
                     $app->$methodName();
                 }
                 else{
-                    echo 'La methode '.$methodName.'existe pas';
+                    echo 'La methode '.$methodName.' n\'existe pas';
                 }
             }
             else{
-                echo ' La classe '.$className.' existe pas';
+                echo ' La classe '.$className.' n\'existe pas';
             }
         }
         else{
-            echo ' Mauvaise route';
+            require_once 'src/View/Error/404.php';
         }
 
     }
