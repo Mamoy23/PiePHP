@@ -7,7 +7,7 @@ class Router {
     private static $routes;
 
     public static function connect ($url, $route) {
-        //var_dump($url, $route);
+        //var_dump($route);
         self::$routes[$url] = $route;
         //var_dump(self::$routes);
     }

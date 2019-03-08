@@ -13,5 +13,9 @@
         <input type="password" name="co_password" placeholder="password">
         <button type="submit">Se connecter</button>
     </form>
+
+    <?php if(isset($error)):?>
+        <p><?= $error ?></p>
+    <?php endif;?>
 </body>
 </html>

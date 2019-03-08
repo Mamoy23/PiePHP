@@ -3,38 +3,41 @@
 namespace Model;
 
 class UserModel{
-    private $bdd;
+
     private $email;
     private $password;
+    private $orm;
     private $table;
-    //private $id;
 
     public function __construct(){
-        try
-        {
-        $this->bdd = new \PDO('mysql:host=localhost;dbname=PiePHP;charset=utf8', 'root', 'root');
-        } catch (Exception $e) {
-        var_dump($e);
-        }
-        $this->request = new \Core\Request;
         $this->table = 'users';
-
+        $this->orm = new \Core\ORM;
     }
 
-    public function save() {
-        $request = $this->request->getParams();
-        $app = new \Core\ORM;
-        $app->create($this->table, array(
-            'email' => $request['email'],
-            'password' => $request['password'])
+    public function save($email, $password) {
+        $this->orm->create($this->table, array(
+            'email' => $email,
+            'password' => $password)
             );
     }
 
-    public function login($email, $password){
-        $query = "SELECT * FROM users WHERE :email = email ";
-        $stmt = $this->bdd->prepare($query);
+    public function login($email){
+        $bdd = $this->orm->readByMail();
+        $query = "SELECT * FROM users WHERE email = :email ";
+        $stmt = $bdd->prepare($query);
         $stmt->bindValue('email', $email);
         $stmt->execute();
-        return $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    public function show($id){
+        return $this->orm->read($this->table, $id);
+    }
+
+    public function update($id, $email, $password){
+        $this->orm->update($this->table, $id, array(
+            'email' => $email,
+            )
+        );
     }
 }

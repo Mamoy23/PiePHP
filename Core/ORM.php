@@ -4,6 +4,8 @@ namespace Core;
 
 class ORM{
 
+    private $bdd;
+
     public function __construct(){
         try
         {
@@ -25,28 +27,56 @@ class ORM{
             }
         }
         $query.= ')';
-
         $stmt = $this->bdd->prepare($query);
+
         foreach($fields as $key => $value){
             $bind = ':'.$key;
             // if(is_string($value)){
             //     $value = "'".$value."'";
             // }
             $stmt->bindValue($bind, $value);
-            if($key == 'password'){
-                $stmt->bindValue($bind, password_hash($value, PASSWORD_DEFAULT));
-            }
-            echo $bind, $value.PHP_EOL;
+            // if($key == 'password'){
+            //     $stmt->bindValue($bind, password_hash($value, PASSWORD_DEFAULT));
+            // }
+            //echo $bind, $value.PHP_EOL;
         }
-            //var_dump("'".$bind."'", $value);
-            // $stmt->bindValue('email', $email);
-            // $stmt->bindValue('password', $password);
         $stmt->execute();
-        return $id = $this->bdd->lastInsertId();
+        return $this->bdd->lastInsertId();
     }
     
-    public function read ($table, $id) {}
-    public function update ($table, $id, $fields) {}
+    public function readByMail () {
+        return $this->bdd;
+    }
+
+    public function read ($table, $id){
+        $query = "SELECT * FROM " .$table. " WHERE id = :id ";
+        $stmt = $this->bdd->prepare($query);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    public function update ($table, $id, $fields) {
+        $query = "UPDATE ".$table. " SET ";
+        foreach($fields as $key => $value){
+            if($value == end($fields)){
+                $query.= $key.' = :'.$key;   
+            }
+            else{
+                $query.= $key.' = :'.$key.', ';
+            }
+        }
+        $query .= " WHERE id = :id";
+        var_dump($query);
+        $stmt = $this->bdd->prepare($query);
+        foreach($fields as $key => $value){
+            $stmt->bindValue($key, $value);
+        }
+        $stmt->bindValue('id', $id);
+        $stmt->execute();
+        return true;
+    }
+
     public function delete ($table, $id) {}
     public function find ($table, $params = array(
     'WHERE' => '1',
