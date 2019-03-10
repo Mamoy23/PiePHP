@@ -37,9 +37,9 @@ class Core {
         require_once 'routes.php';
 
         $url = substr($_SERVER['REQUEST_URI'], 11);
-        $routes = Router::get($url);
+        //$routes = Router::get($url);
         //var_dump($routes[$url]);
-        if($routes != null){
+        if($routes = Router::get($url)){
             $className = 'Controller\\'.ucfirst($routes['controller']).'Controller';
             $methodName = $routes['action'].'Action';
             if(class_exists($className)){

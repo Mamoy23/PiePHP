@@ -1,25 +1,27 @@
 <?php
 
 namespace Model;
+use \Core\Entity;
 
-class UserModel{
+class UserModel extends Entity{
 
-    private $email;
-    private $password;
-    private $orm;
-    private $table;
+    // private $email;
+    // private $password;
+    //private $orm;
+    protected $table = 'users';
 
-    public function __construct(){
-        $this->table = 'users';
-        $this->orm = new \Core\ORM;
-    }
+    // public function __construct(){
+    //     //$this->table = 'users';
+    //     //$this->orm = new \Core\ORM;
+    //     //parent::__construct();
+    // }
 
-    public function save($email, $password) {
-        $this->orm->create($this->table, array(
-            'email' => $email,
-            'password' => $password)
-            );
-    }
+    // public function save($email, $password) {
+    //     $this->orm->create($this->table, array(
+    //         'email' => $email,
+    //         'password' => $password)
+    //         );
+    // }
 
     public function login($email){
         $bdd = $this->orm->readByMail();
@@ -30,14 +32,14 @@ class UserModel{
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
-    public function show($id){
-        return $this->orm->read($this->table, $id);
-    }
+    // public function show($id){
+    //     return $this->orm->read($this->table, $id);
+    // }
 
-    public function update($id, $email, $password){
-        $this->orm->update($this->table, $id, array(
-            'email' => $email,
-            )
-        );
-    }
+    // public function update($id, $email, $password){
+    //     $this->orm->update($this->table, $id, array(
+    //         'email' => $email,
+    //         )
+    //     );
+    // }
 }

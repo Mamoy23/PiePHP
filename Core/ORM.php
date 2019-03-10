@@ -67,7 +67,6 @@ class ORM{
             }
         }
         $query .= " WHERE id = :id";
-        //var_dump($query);
         $stmt = $this->bdd->prepare($query);
         foreach($fields as $key => $value){
             $stmt->bindValue($key, $value);
@@ -77,10 +76,10 @@ class ORM{
     }
 
     public function delete ($table, $id) {
-        $query = "DELETE * FROM " .$table. "WHERE id = :id";
+        $query = "DELETE FROM " .$table. " WHERE id = :id";
         $stmt = $this->bdd->prepare($query);
         $stmt->bindValue(':id', $id);
-        $stmt->execute();
+        return $stmt->execute();
     }
 
     public function find ($table, $params = array(
@@ -96,6 +95,7 @@ class ORM{
                 }
             }
         }
+        //var_dump($query);
         $stmt = $this->bdd->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
