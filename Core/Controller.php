@@ -26,5 +26,8 @@ class Controller{
 
     public function __destruct(){
         echo self::$_render;
+        $obj = new TemplateEngine();
+        $content = $obj->a();
+        //echo $content;
     }
 }

@@ -23,9 +23,9 @@ class UserController extends Controller{
     public function addAction(){
         $this->render('register');
 
-        if(isset($this->params['email']) && !empty($this->params['email'])
-        && isset($this->params['password']) && !empty($this->params['password'])){
-            $pwd_hash = password_hash($this->params['password'], PASSWORD_DEFAULT);
+        if(isset($this->um->email) && !empty($this->um->email)
+        && isset($this->um->password) && !empty($this->um->password)){
+            //$pwd_hash = password_hash($this->um->password, PASSWORD_DEFAULT);
             //$this->um = new \Model\UserModel($this->params);
             $this->um->create();
             $this->render('login');
@@ -37,16 +37,18 @@ class UserController extends Controller{
 
         if(isset($this->params['co_email']) && !empty($this->params['co_email'])
         && isset($this->params['co_password']) && !empty($this->params['co_password'])){
+            
           $user = $this->um->login($this->params['co_email']);
-            //if(password_verify($this->params['co_password'],$user['password'])){
+          //var_dump($user['password']);
+            if(password_verify($this->params['co_password'], $user['password'])){
                 $_SESSION = $user;
                 $this->render('show', ['email' => $user['email']]);
                 //var_dump($_SESSION);
-            //}
-            // else{
-            //     $error = "Mauvais mot de passe";
-            //     $this->render('login', ['error' => $error]);
-            // }
+            }
+            else{
+                $error = "Mauvais mot de passe";
+                $this->render('login', ['error' => $error]);
+            }
         }
     }
 
@@ -58,11 +60,11 @@ class UserController extends Controller{
     public function updateAction() {
         //var_dump($_SESSION);
         //$this->render('show', ['email' => $_SESSION['email'] ]);
-        if(isset($this->params['up_email']) && !empty($this->params['up_email']))
+        if(isset($this->um->email) && !empty($this->um->email))
             //$this->um->update($_SESSION['id'], $this->params['up_mail'], $this->params['up_password']);
         //}
         $this->um->update();
-        $this->render('show', ['email' => $_SESSION['email']]);
+        $this->render('show', ['email' => $_SESSION['email'], 'pwd' => $_SESSION['password']]);
     }
 
     public function deleteAction() {
@@ -72,5 +74,10 @@ class UserController extends Controller{
 
     public function findAction() {
         $this->um->find();
+    }
+
+    public function logoutAction(){
+        session_destroy();
+        $this->render('login');
     }
 }

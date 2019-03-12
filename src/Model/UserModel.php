@@ -8,6 +8,7 @@ class UserModel extends Entity{
     // private $email;
     // private $password;
     //private $orm;
+    protected $id;
     protected $table = 'users';
 
     // public function __construct(){

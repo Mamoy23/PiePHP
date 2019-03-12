@@ -1,19 +1,23 @@
 <?php 
 
 namespace Core;
+//use \Core\Database;
 
-class ORM{
+class ORM extends Database {
 
-    private $bdd;
+    //private $bdd;
 
-    public function __construct(){
-        try
-        {
-        $this->bdd = new \PDO('mysql:host=localhost;dbname=PiePHP;charset=utf8', 'root', 'root');
-        } catch (Exception $e) {
-        var_dump($e);
-        }
-    }
+    // public function __construct(){
+    //     // try
+    //     // {
+    //     // $this->bdd = new \PDO('mysql:host=localhost;dbname=PiePHP;charset=utf8', 'root', 'root');
+    //     // } catch (Exception $e) {
+    //     // var_dump($e);
+    //     // }
+
+    //     // $this->bdd = new Database();
+    //     // $this->bdd->setDB();
+    // }
 
     public function create ($table, $fields) {
         $query = "INSERT INTO ".$table." (".implode(', ',array_keys($fields)).") VALUES (";
@@ -35,9 +39,9 @@ class ORM{
             //     $value = "'".$value."'";
             // }
             $stmt->bindValue($bind, $value);
-            // if($key == 'password'){
-            //     $stmt->bindValue($bind, password_hash($value, PASSWORD_DEFAULT));
-            // }
+            if($key == 'password'){
+                $stmt->bindValue($bind, password_hash($value, PASSWORD_DEFAULT));
+            }
             //echo $bind, $value.PHP_EOL;
         }
         $stmt->execute();

@@ -5,16 +5,19 @@ namespace Core;
 class Entity {
 
     public $orm;
+    // public $bdd = new Database()->DB();
 
     public function __construct($params) {
-        $this->orm = new ORM;
+        $this->orm = new ORM();
         $this->params = $params;
-        $this->id = $_SESSION['id'];
-        //var_dump($_SESSION['id']);
         foreach($params as $key => $value){
             $this->$key = $value;
             //echo $this->$key;
         }
+        if(!empty($_SESSION)){
+            $this->id = $_SESSION['id'];
+        }
+        //var_dump($_SESSION['id']);
     }
 
     public function create() {
