@@ -32,7 +32,7 @@ class ORM extends Database {
         }
         $query.= ')';
         $stmt = $this->bdd->prepare($query);
-
+        var_dump($query);
         foreach($fields as $key => $value){
             $bind = ':'.$key;
             // if(is_string($value)){
@@ -42,7 +42,7 @@ class ORM extends Database {
             if($key == 'password'){
                 $stmt->bindValue($bind, password_hash($value, PASSWORD_DEFAULT));
             }
-            //echo $bind, $value.PHP_EOL;
+            echo $bind, $value.PHP_EOL;
         }
         $stmt->execute();
         return $this->bdd->lastInsertId();
@@ -53,11 +53,11 @@ class ORM extends Database {
     }
 
     public function read ($table, $id){
-        $query = "SELECT * FROM " .$table. " WHERE id = :id ";
+        $query = "SELECT * FROM " .$table. " WHERE id_user = :id ";
         $stmt = $this->bdd->prepare($query);
         $stmt->bindValue(':id', $id);
         $stmt->execute();
-        return $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function update ($table, $id, $fields) {
@@ -70,7 +70,7 @@ class ORM extends Database {
                 $query.= $key.' = :'.$key.', ';
             }
         }
-        $query .= " WHERE id = :id";
+        $query .= " WHERE id_user = :id";
         $stmt = $this->bdd->prepare($query);
         foreach($fields as $key => $value){
             $stmt->bindValue($key, $value);
@@ -80,15 +80,15 @@ class ORM extends Database {
     }
 
     public function delete ($table, $id) {
-        $query = "DELETE FROM " .$table. " WHERE id = :id";
+        $query = "DELETE FROM " .$table. " WHERE id_user = :id";
         $stmt = $this->bdd->prepare($query);
         $stmt->bindValue(':id', $id);
         return $stmt->execute();
     }
 
     public function find ($table, $params = array(
-    'WHERE' => '',
-    'ORDER BY' => '',
+    'WHERE' => '1',
+    'ORDER BY' => 'id ASC',
     'LIMIT' => ''
     )) {
         $query = "SELECT * FROM " .$table. " ";
@@ -99,7 +99,6 @@ class ORM extends Database {
                 }
             }
         }
-        //var_dump($query);
         $stmt = $this->bdd->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);

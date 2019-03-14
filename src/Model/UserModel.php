@@ -8,13 +8,16 @@ class UserModel extends Entity{
     // private $email;
     // private $password;
     //private $orm;
-    protected $id;
-    protected $table = 'users';
+    //protected $id = $_SESSION['id_user'];
+    //protected $table = 'users';
 
     // public function __construct(){
     //     //$this->table = 'users';
     //     //$this->orm = new \Core\ORM;
-    //     //parent::__construct();
+    //     parent::__construct();
+    //     if(!empty($_SESSION)){
+    //         $this->id = $_SESSION['id_user'];
+    //     }
     // }
 
     // public function save($email, $password) {

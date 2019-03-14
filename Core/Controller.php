@@ -2,10 +2,17 @@
 
 namespace Core;
 
-use \Core;
+//use \Core;
 
 class Controller{
     protected static $_render;
+    protected $request;
+    protected $params;
+
+    public function __construct(){
+        $this->request = new Request;
+        $this->params = $this->request->getParams();
+    }
 
     protected function render($view, $scope = []) {
         extract($scope);
@@ -14,10 +21,19 @@ class Controller{
         $f = str_replace('Controller', '', $f);
         
         if (file_exists($f)) {
+
             ob_start();
-            include($f);
+            // $oldcontent = file_get_contents($f);
+            // $obj = new TemplateEngine();
+            // $obj->parse($f);
+            //echo $newcontent;
+            //file_put_contents($f, $newcontent);
+            //echo $oldcontent;
+            //file_put_contents($f, $oldcontent);
+            //include('tmp.php'); 
+            include($f);   
             $view = ob_get_clean();
-            ob_start();
+            ob_start();        
             include(implode(DIRECTORY_SEPARATOR, [dirname(__DIR__), 'src', 'View',
             'index']) . '.php');
             self::$_render = ob_get_clean();
@@ -26,8 +42,8 @@ class Controller{
 
     public function __destruct(){
         echo self::$_render;
-        $obj = new TemplateEngine();
-        $content = $obj->a();
+        // $obj = new TemplateEngine();
+        // $content = $obj->a();
         //echo $content;
     }
 }

@@ -6,20 +6,25 @@ use \Model\UserModel;
 
 class UserController extends Controller{
 
-    private $request;
-    private $params;
+    // protected $request;
+    // protected $params;
     private $um;
 
     public function __construct(){
-        $this->request = new \Core\Request;
-        $this->params = $this->request->getParams();
+        // $this->request = new \Core\Request;
+        // $this->params = $this->request->getParams();
         //$this->id = $_SESSION['id'];
+        parent::__construct();
         $this->um = new \Model\UserModel($this->params);
     }
     
     public function indexAction() {
         $this->render('index');
     }
+
+    // public function vueAction(){
+    //     $this->render('register');
+    // }
     public function addAction(){
         $this->render('register');
 
@@ -30,6 +35,10 @@ class UserController extends Controller{
             $this->um->create();
             $this->render('login');
         }
+        // else{
+        //     $error = "Remplit les champs";
+        //     $this->render('register', ['error' => $error]);
+        // }
     }
     
     public function loginAction() {
@@ -78,6 +87,6 @@ class UserController extends Controller{
 
     public function logoutAction(){
         session_destroy();
-        $this->render('login');
+        $this->render('login', ['session' => $_SESSION = null]);
     }
 }
