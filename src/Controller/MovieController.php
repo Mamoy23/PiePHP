@@ -20,10 +20,10 @@ class MovieController extends Controller {
     }
 
     public function addAction(){
-        if(isset($_POST['name']) && !empty($_POST['name'])
-        && isset($_POST['genre']) && !empty($_POST['genre'])
-        && isset($_POST['date']) && !empty($_POST['date'])
-        && isset($_POST['id_user']) && !empty($_POST['id_user'])){
+        if(isset($this->mm->name) && !empty($this->mm->name)
+        && isset($this->mm->genre) && !empty($this->mm->genre)
+        && isset($this->mm->date) && !empty($this->mm->date)
+        && isset($this->mm->id_user) && !empty($this->mm->id_user)){
             $this->mm->create();
             $result = $this->mm->read();
             $this->render('list', ['results' => $result]);
@@ -37,7 +37,6 @@ class MovieController extends Controller {
     public function showAction(){
         $list = $this->mm->read();
         $this->render('list', ['results' => $list]);
-        //var_dump($list);
     }
 
     public function updateAction(){
@@ -45,8 +44,8 @@ class MovieController extends Controller {
     }
 
     public function deleteAction(){
-        if(isset($_POST['id_film']) && !empty($_POST['id_film'])){
-            $this->mm->delete();
+        if(isset($this->mm->id_film) && !empty($this->mm->id_film)){
+            $this->mm->delete($this->mm->id_film,'id_film');
         }
     }
 

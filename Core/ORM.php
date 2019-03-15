@@ -6,7 +6,7 @@ namespace Core;
 class ORM extends Database {
 
     //private $bdd;
-
+    //private $id_name = 'id_user';
     // public function __construct(){
     //     // try
     //     // {
@@ -32,7 +32,7 @@ class ORM extends Database {
         }
         $query.= ')';
         $stmt = $this->bdd->prepare($query);
-        var_dump($query);
+        //var_dump($query);
         foreach($fields as $key => $value){
             $bind = ':'.$key;
             // if(is_string($value)){
@@ -42,7 +42,7 @@ class ORM extends Database {
             if($key == 'password'){
                 $stmt->bindValue($bind, password_hash($value, PASSWORD_DEFAULT));
             }
-            echo $bind, $value.PHP_EOL;
+            //echo $bind, $value.PHP_EOL;
         }
         $stmt->execute();
         return $this->bdd->lastInsertId();
@@ -52,15 +52,16 @@ class ORM extends Database {
         return $this->bdd;
     }
 
-    public function read ($table, $id){
-        $query = "SELECT * FROM " .$table. " WHERE id_user = :id ";
+    public function read ($table, $id, $id_name = 'id_user'){
+        $query = "SELECT * FROM " .$table. " WHERE $id_name = :id ";
         $stmt = $this->bdd->prepare($query);
         $stmt->bindValue(':id', $id);
         $stmt->execute();
+        //var_dump($query, $id);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function update ($table, $id, $fields) {
+    public function update ($table, $id, $fields, $id_name = 'id_user') {
         $query = "UPDATE ".$table. " SET ";
         foreach($fields as $key => $value){
             if($value == end($fields)){
@@ -70,7 +71,7 @@ class ORM extends Database {
                 $query.= $key.' = :'.$key.', ';
             }
         }
-        $query .= " WHERE id_user = :id";
+        $query .= " WHERE $id_name = :id";
         $stmt = $this->bdd->prepare($query);
         foreach($fields as $key => $value){
             $stmt->bindValue($key, $value);
@@ -79,8 +80,8 @@ class ORM extends Database {
         return $stmt->execute();
     }
 
-    public function delete ($table, $id) {
-        $query = "DELETE FROM " .$table. " WHERE id_user = :id";
+    public function delete ($table, $id, $id_name = 'id_user') {
+        $query = "DELETE FROM " .$table. " WHERE $id_name = :id";
         $stmt = $this->bdd->prepare($query);
         $stmt->bindValue(':id', $id);
         return $stmt->execute();

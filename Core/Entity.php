@@ -6,7 +6,7 @@ class Entity {
 
     public $orm;
     protected $table = null;
-    protected $id_name = null;
+    protected $id_name;
     protected $id;
     // public $bdd = new Database()->DB();
 
@@ -20,10 +20,10 @@ class Entity {
         if(!empty($_SESSION)){
             $this->id = $_SESSION['id_user'];
         }
-        if(empty($id_name)){
-            $this->id_name ='id_'.strtolower(str_replace('\\', '', str_replace('Model', '', (get_class($this)))));
-            //var_dump($this->id_name);
-        }
+        // if(empty($id_name)){
+        //     $this->id_name ='id_'.strtolower(str_replace('\\', '', str_replace('Model', '', (get_class($this)))));
+        //     //var_dump($this->id_name);
+        // }
         if(empty($table)){
             $this->table = strtolower(str_replace('\\', '', str_replace('Model', '', (get_class($this))))).'s';
             //var_dump($this->table);

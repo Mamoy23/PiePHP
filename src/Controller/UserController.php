@@ -38,18 +38,19 @@ class UserController extends Controller{
         // else{
         //     $error = "Remplit les champs";
         //     $this->render('register', ['error' => $error]);
-        // }
+        // }09Dramatique128
+
     }
     
     public function loginAction() {
         $this->render('login');
 
-        if(isset($this->params['co_email']) && !empty($this->params['co_email'])
-        && isset($this->params['co_password']) && !empty($this->params['co_password'])){
+        if(isset($this->um->co_email) && !empty($this->um->co_email)
+        && isset($this->um->co_password) && !empty($this->um->co_password)){
             
-          $user = $this->um->login($this->params['co_email']);
+          $user = $this->um->login($this->um->co_email);
           //var_dump($user['password']);
-            if(password_verify($this->params['co_password'], $user['password'])){
+            if(password_verify($this->um->co_password, $user['password'])){
                 $_SESSION = $user;
                 $this->render('show', ['email' => $user['email']]);
                 //var_dump($_SESSION);

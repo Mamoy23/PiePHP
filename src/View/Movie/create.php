@@ -7,8 +7,8 @@
         <input type="date" name="date" min="1900-01-01" max="2019-04-01" class="form-control m-1">
 
         <select name="genre" id="genre" class="form-control m-1">
-            <?php  //$genres = array_unique($genres);
-            foreach($genres as $genre):?>
+            <option value="">Genre</option>
+            <?php foreach($genres as $genre):?>
                 <option value="<?=$genre['name']?>"><?=ucfirst($genre['name'])?></option>
             <?php endforeach;?>
         </select>

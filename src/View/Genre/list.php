@@ -18,7 +18,7 @@
                 <?php endforeach;?> 
         </tbody>
     </table>
-    <button type="submit" class="btn btn-outline-danger">Supprimer ce genre/button>
+    <button type="submit" class="btn btn-outline-danger">Supprimer ce genre</button>
     </form>
     <?php endif;?>
 
