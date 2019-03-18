@@ -11,10 +11,10 @@
         <button class="btn btn-outline-info m-1" id="signin_button">S'inscrire</button>
     </div>
 
-    <!-- @if(isset($error)) -->
-    <?php if(isset($error)):?>
-        <p class="alert alert-danger"> {{ $error }} </p>
-    <?php endif; ?>
+    @isset($error)
+        <p class="alert alert-danger">{{ $error }}</p>
+    @endisset
+
 </div>
 <script>
 $('document').ready(function(){

@@ -1,9 +1,9 @@
 <div class="container">
-    <h1 class="text-center text-dark"> Bienvenue   <?= ucfirst(strstr($email, '@', true)) ?></h1>
+    <h1 class="text-center text-dark"> Bienvenue {{ ucfirst(strstr($email, '@', true)) }}</h1>
     
     <h2 class="text-dark">Modifier mon profil</h2>
     <form action="show" method="POST" class="form-group m-1">
-        <input type="email" name="email" value="<?= $email?>" class="form-control m-1">
+        <input type="email" name="email" value="{{ $email }}" class="form-control m-1">
         <!-- <input type="password" name="password" value=""> -->
         <button type="submit" class="btn btn-outline-success m-1">Valider</button>
     </form>
@@ -14,9 +14,9 @@
         <button type="submit">Supprimer mon compte</button>
     </form> -->
 
-    <?php if(isset($error)):?>
-        <p><?= $error ?></p>
-    <?php endif;?>
+    @if (isset($error))
+        <p>{{ $error }}</p>
+    @endif
 </div>
 
 <script>

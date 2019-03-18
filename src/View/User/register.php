@@ -3,6 +3,7 @@
 <div class="container">
     <h1 class="text-dark text-center m-1">Inscription</h1>
     <form action="add" method="POST" class="form-group m-1">
+        <input type="hidden" name="check">
         <input type="email" name="email" placeholder="Email" class="form-control m-1">
         <input type="password" name="password" placeholder="Mot de passe" class="form-control m-1">
         <button type="submit" class="btn btn-outline-success m-1">S'inscrire</button>  
@@ -12,9 +13,9 @@
         <button class="btn btn-outline-info m-1" id="login_button">Se connecter</button>
     </div>
 
-    <?php if(isset($error)):?>
-        <p><?= $error ?></p>
-    <?php endif; ?>
+    @isset($error)
+    <p class="alert alert-danger">{{ $error }}</p>
+    @endisset
 
 </div>
 <script>

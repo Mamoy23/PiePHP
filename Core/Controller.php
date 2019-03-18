@@ -24,14 +24,15 @@ class Controller{
 
             ob_start();
             // $oldcontent = file_get_contents($f);
-            // $obj = new TemplateEngine();
-            // $obj->parse($f);
+            $obj = new TemplateEngine();
+            $obj->parse($f);
             //echo $newcontent;
             //file_put_contents($f, $newcontent);
             //echo $oldcontent;
             //file_put_contents($f, $oldcontent);
-            //include('tmp.php'); 
-            include($f);   
+            //file_put_contents('tmp.php', $content);
+            include('tmp.php'); 
+            //include($f);   
             $view = ob_get_clean();
             ob_start();        
             include(implode(DIRECTORY_SEPARATOR, [dirname(__DIR__), 'src', 'View',

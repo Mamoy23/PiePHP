@@ -1,6 +1,6 @@
 <div class="container">
     <h1 class="text-dark text-center m-1">Mes genres</h1>
-    <?php if(isset($results)):?>
+    @isset($results)
     <table class="table">
         <thead>
             <tr>
@@ -10,24 +10,24 @@
         </thead>
         <tbody>
             <form action="delete" method="POST">
-                <?php foreach($results as $result):?>
+                @foreach ($results as $result)
                 <tr>
-                    <td><input type="checkbox" name="id_film" value="<?= $result['id_film']?>" id="<?= $result['id_film']?>"></td>
-                    <td><?= $result['name']?></td>
+                    <td><input type="checkbox" name="id_genre" value="{{ $result['id_genre'] }}" id="{{ $result['id_genre'] }}"></td>
+                    <td>{{ $result['name'] }}</td>
                 </tr>
-                <?php endforeach;?> 
+                @endforeach 
         </tbody>
     </table>
     <button type="submit" class="btn btn-outline-danger">Supprimer ce genre</button>
     </form>
-    <?php endif;?>
+    @endisset
 
-    <button class="btn btn-outline-info" id="add_movie">Ajouter un genre</button>
+    <button class="btn btn-outline-info" id="add_genre">Ajouter un genre</button>
 </div>
 
 <script>
     $('document').ready(function(){
-        $('#add_movie').click(function(){
+        $('#add_genre').click(function(){
             window.location.href = "add";
         });
     });

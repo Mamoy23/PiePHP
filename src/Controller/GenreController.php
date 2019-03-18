@@ -30,9 +30,17 @@ class GenreController extends Controller{
 
     public function addAction(){
         $this->render('create');
-        var_dump($this->gm->name);
+        //var_dump($this->gm->name);
         if(isset($this->gm->name) && !empty($this->gm->name)){
             $this->gm->create();
+            $this->showAction();
+        }
+    }
+
+    public function deleteAction(){
+        if(isset($this->gm->id_genre) && !empty($this->gm->id_genre)){
+            $this->gm->delete($this->gm->id_genre,'id_genre');
+            $this->showAction();
         }
     }
 }

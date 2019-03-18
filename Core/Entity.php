@@ -15,7 +15,7 @@ class Entity {
         $this->params = $params;
         foreach($params as $key => $value){
             $this->$key = $value;
-            echo $this->$key;
+            //echo $this->$key;
         }
         if(!empty($_SESSION)){
             $this->id = $_SESSION['id_user'];
@@ -43,8 +43,9 @@ class Entity {
         return $this->orm->update($this->table, $this->id, $this->params);
     }
 
-    public function delete(){
-        return $this->orm->delete($this->table, $this->id);
+    public function delete($id, $id_name){
+        //var_dump($id, $id_name);
+        return $this->orm->delete($this->table, $id, $id_name);
     }
 
     public function find(){

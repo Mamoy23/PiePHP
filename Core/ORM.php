@@ -77,11 +77,13 @@ class ORM extends Database {
             $stmt->bindValue($key, $value);
         }
         $stmt->bindValue('id', $id);
+        //var_dump($query, $id);
         return $stmt->execute();
     }
 
     public function delete ($table, $id, $id_name = 'id_user') {
         $query = "DELETE FROM " .$table. " WHERE $id_name = :id";
+        //var_dump($query);
         $stmt = $this->bdd->prepare($query);
         $stmt->bindValue(':id', $id);
         return $stmt->execute();

@@ -21,11 +21,13 @@ Router::connect('/user/logout', ['controller' => 'user', 'action' => 'logout' ])
 Router::connect('/movies', ['controller' => 'movie', 'action' => 'index' ]);
 Router::connect('/movies/add', ['controller' => 'movie', 'action' => 'add' ]);
 Router::connect('/movies/list', ['controller' => 'movie', 'action' => 'show' ]);
+Router::connect('/movies/update', ['controller' => 'movie', 'action' => 'update' ]);
 Router::connect('/movies/delete', ['controller' => 'movie', 'action' => 'delete' ]);
 
 Router::connect('/genres', ['controller' => 'genre', 'action' => 'index' ]);
 Router::connect('/genres/list', ['controller' => 'genre', 'action' => 'show' ]);
 Router::connect('/genres/add', ['controller' => 'genre', 'action' => 'add' ]);
+Router::connect('/genres/delete', ['controller' => 'genre', 'action' => 'delete' ]);
 //Router::connect('/film/save', ['controller' => 'film', 'action' => 'save' ]);
 
 //Router::connect('/prices', ['controller' => 'prix', 'action' => 'index', 'prices' => $prices ]);

@@ -25,8 +25,7 @@ class MovieController extends Controller {
         && isset($this->mm->date) && !empty($this->mm->date)
         && isset($this->mm->id_user) && !empty($this->mm->id_user)){
             $this->mm->create();
-            $result = $this->mm->read();
-            $this->render('list', ['results' => $result]);
+            $this->showAction();
             return false;
             //$this->render('index');
         }
@@ -40,12 +39,14 @@ class MovieController extends Controller {
     }
 
     public function updateAction(){
-        
+        $this->render('update');
     }
 
     public function deleteAction(){
-        if(isset($this->mm->id_film) && !empty($this->mm->id_film)){
-            $this->mm->delete($this->mm->id_film,'id_film');
+        //var_dump($this->mm->id_movie);
+        if(isset($this->mm->id_movie) && !empty($this->mm->id_movie)){
+            $this->mm->delete($this->mm->id_movie,'id_movie');
+            $this->showAction();
         }
     }
 

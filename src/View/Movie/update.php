@@ -1,5 +1,5 @@
 <div class="container">
-    <h1 class="text-dark text-center m-1">Ajouter un film</h1>
+    <h1 class="text-dark text-center m-1">Modifier le film</h1>
     
     <form action="add" method="POST" class="form-group m-1">
         <input type="text" name="name" placeholder="Nom du film" class="form-control m-1">
