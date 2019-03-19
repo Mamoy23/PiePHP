@@ -1,5 +1,5 @@
 <div class="container">
-    <h1 class="text-dark text-center m-1">Modifier le film</h1>
+    <h1 class="text-dark text-center m-4">Modifier le film</h1>
     <form action="update" method="POST" class="form-group m-1">
         <input type="text" name="name" value="{{ $results[0]['name'] }}" class="form-control m-1">
         <label for="date" class="text-dark m-1">Date de sortie</label>

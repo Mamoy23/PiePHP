@@ -1,5 +1,5 @@
 <div class="container">
-    <h1 class="text-dark text-center">Connexion</h1>
+    <h1 class="text-dark text-center m-4">Connexion</h1>
     <form action="login" method="POST">
         <input type="email" name="co_email" placeholder="Email" class="form-control m-1">
         <input type="password" name="co_password" placeholder="Mot de passe" class="form-control m-1">
@@ -16,10 +16,3 @@
     @endisset
 
 </div>
-<script>
-$('document').ready(function(){
-    $('#signin_button').click(function(){
-            window.location.href = "add";
-    });
-});
-</script>

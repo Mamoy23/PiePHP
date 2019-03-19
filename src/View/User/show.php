@@ -1,5 +1,5 @@
 <div class="container">
-    <h1 class="text-center text-dark"> Bienvenue {{ ucfirst(strstr($email, '@', true)) }}</h1>
+    <h1 class="text-center text-dark m-4"> Bienvenue {{ ucfirst(strstr($email, '@', true)) }}</h1>
     
     <h2 class="text-dark">Modifier mon profil</h2>
     <form action="show" method="POST" class="form-group m-1">
@@ -18,14 +18,3 @@
         <p>{{ $error }}</p>
     @endif
 </div>
-
-<script>
-$('document').ready(function(){
-    $('#delete_button').click(function(){
-        res = confirm('Etes-vous sûr de vouloir vous désinscrire?');
-        if(res){
-            window.location.href = "delete";
-        }
-    });
-});
-</script>

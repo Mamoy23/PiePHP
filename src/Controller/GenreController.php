@@ -38,6 +38,7 @@ class GenreController extends Controller{
     }
 
     public function updateAction(){
+        //var_dump($this->gm->id_genre);
         if(isset($this->gm->id_genre)){
             $_SESSION['id_genre'] = $this->gm->id_genre;
         }

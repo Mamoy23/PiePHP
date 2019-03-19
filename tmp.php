@@ -1,35 +1,20 @@
+<!DOCTYPE html>
+<html>
 <div class="container">
-    <h1 class="text-dark text-center m-1">Mes genres</h1>
-    <button class="btn btn-outline-info" id="add_genre">Ajouter un genre</button>
-    <?php if(isset($results)): ?>
-    <table class="table">
-        <thead>
-            <tr>
-                <th></th>         
-                <th>Nom</th>
-            </tr>
-        </thead>
-        <tbody>
-            <form action="delete" method="POST">
-                <?php foreach($results as $result): ?>
-                <tr>
-                    <td><input type="radio" name="id_genre" value="<?= htmlentities( $result['id_genre'] )?>" id="<?= htmlentities( $result['id_genre'] )?>"></td>
-                    <td><?= htmlentities( $result['name'] )?></td>
-                </tr>
-                <?php endforeach; ?> 
-        </tbody>
-    </table>
-            <button type="submit" class="btn btn-outline-danger">Supprimer ce genre</button>
-            <button type="submit" formaction="update" id="update_movie" class="btn btn-outline-secondary">Modifier ce genre</button>
-            </form>
+    <h1 class="text-dark text-center m-4">Inscription</h1>
+    <form action="add" method="POST" class="form-group m-1">
+        <!-- <input type="hidden" name="check"> -->
+        <input type="email" name="email" placeholder="Email" class="form-control m-1">
+        <input type="password" name="password" placeholder="Mot de passe" class="form-control m-1">
+        <button type="submit" class="btn btn-outline-success m-1">S'inscrire</button>  
+    </form>
+    <div class="text-right">        
+        <p class="text-info m-1">Déjà un compte ? </p>
+        <button class="btn btn-outline-info m-1" id="login_button">Se connecter</button>
+    </div>
+
+    <?php if(isset($error)): ?>
+    <p class="alert alert-danger"><?= htmlentities( $error )?></p>
     <?php endif; ?>
 
 </div>
-
-<script>
-    $('document').ready(function(){
-        $('#add_genre').click(function(){
-            window.location.href = "add";
-        });
-    });
-</script>

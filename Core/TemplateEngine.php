@@ -51,6 +51,12 @@ class TemplateEngine {
                 },
                 '~([@][e][n][d][e][m][p][t][y])~' => function($match) {
                     return '<?php endif; ?>';
+                },
+                '~([@][!][e][m][p][t][y])(\(.*?\))~' => function($match) {
+                    return '<?php if(!empty'.$match[2].'): ?>';
+                },
+                '~([@][e][n][d][!][e][m][p][t][y])~' => function($match) {
+                    return '<?php endif; ?>';
                 }
             ],
             $content

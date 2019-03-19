@@ -30,20 +30,21 @@ class UserController extends Controller{
     // }
     public function addAction(){
         
-        if(isset($this->um->check)){
+        //if(isset($this->um->check)){
             if(isset($this->um->email) && !empty($this->um->email)
             && isset($this->um->password) && !empty($this->um->password)){
                 //$pwd_hash = password_hash($this->um->password, PASSWORD_DEFAULT);
                 //$this->um = new \Model\UserModel($this->params);
                 $this->um->create();
                 $this->render('login');
+                return false;
             }
             else{
                 $error = "Merci de remplir tous les champs";
                 $this->render('register', ['error' => $error]);
                 return false;
             }
-        }
+        //}
         $this->render('register');
     }
     
@@ -77,11 +78,13 @@ class UserController extends Controller{
         //var_dump($_SESSION);
         //$this->render('show', ['email' => $_SESSION['email'] ]);
         if(isset($this->um->email) && !empty($this->um->email)){
-            $this->um->update();
+            $this->um->update($this->id, 'id_user');
             $user = $this->um->read();
             //var_dump($user[0]['email']);
             $this->render('show', ['email' => $user[0]['email']]);
         }
+        $user = $this->um->read();
+        $this->render('show', ['email' => $user[0]['email']]);
             //$this->um->update($_SESSION['id'], $this->params['up_mail'], $this->params['up_password']);
         //}
     }

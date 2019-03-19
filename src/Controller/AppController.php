@@ -7,6 +7,6 @@ use \Core\Controller;
 class AppController extends Controller{
 
     public function indexAction(){
-        echo 'index de appcontroller';
+       $this->render('index');
     }
 }

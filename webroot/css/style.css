@@ -1,0 +1,11 @@
+nav{
+    font-family: 'Lilita One', cursive;
+}
+.container{
+    font-family: 'Lilita One', cursive;
+    letter-spacing: 1px;
+    font-size: 17px;
+}
+.highlight{
+    background-color: rgba(207, 207, 207, 0.281);
+}

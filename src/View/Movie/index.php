@@ -1,5 +1,5 @@
 <div class="container">
-    <h1 class="text-dark text-center m-1">Tous les films</h1>
+    <h1 class="text-dark text-center m-4">Tous les films</h1>
     @isset($results)
     <table class="table">
         <thead>

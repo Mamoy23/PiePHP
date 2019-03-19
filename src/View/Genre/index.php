@@ -1,5 +1,5 @@
 <div class="container">
-    <h1 class="text-center text-dark">Tous les genres</h1>
+    <h1 class="text-center text-dark m-4">Tous les genres</h1>
     <table class="table">
         @foreach ($results as $result)
             <tr>
