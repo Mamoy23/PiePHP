@@ -9,7 +9,7 @@
         <select name="genre" id="genre" class="form-control m-1">
             <option value="">Genre</option>
             @foreach ($genres as $genre)
-                <option value="{{ $genre['name'] }}">{{ ucfirst($genre['name']) }}</option>
+                <option value="{{ $genre['name'] }}">{{ ucfirst(strtolower($genre['name'])) }}</option>
             @endforeach
         </select>
         <input type="hidden" name="id_user" value="{{ $_SESSION['id_user'] }}">

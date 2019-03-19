@@ -28,6 +28,7 @@ Router::connect('/genres', ['controller' => 'genre', 'action' => 'index' ]);
 Router::connect('/genres/list', ['controller' => 'genre', 'action' => 'show' ]);
 Router::connect('/genres/add', ['controller' => 'genre', 'action' => 'add' ]);
 Router::connect('/genres/delete', ['controller' => 'genre', 'action' => 'delete' ]);
+Router::connect('/genres/update', ['controller' => 'genre', 'action' => 'update' ]);
 //Router::connect('/film/save', ['controller' => 'film', 'action' => 'save' ]);
 
 //Router::connect('/prices', ['controller' => 'prix', 'action' => 'index', 'prices' => $prices ]);

@@ -92,7 +92,7 @@ class ORM extends Database {
     public function find ($table, $params = array(
     'WHERE' => '1',
     'ORDER BY' => 'id ASC',
-    'LIMIT' => ''
+    'LIMIT' => '1'
     )) {
         $query = "SELECT * FROM " .$table. " ";
         if(isset($params)){
@@ -103,6 +103,7 @@ class ORM extends Database {
             }
         }
         $stmt = $this->bdd->prepare($query);
+        //var_dump($query);
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }

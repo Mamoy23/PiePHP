@@ -19,7 +19,7 @@ class GenreController extends Controller{
     }
 
     public function indexAction(){
-        $results = $this->gm->find();
+        $results = $this->gm->findAll();
         $this->render('index', ['results' => $results]);
     }
 
@@ -29,12 +29,25 @@ class GenreController extends Controller{
     }
 
     public function addAction(){
-        $this->render('create');
-        //var_dump($this->gm->name);
         if(isset($this->gm->name) && !empty($this->gm->name)){
             $this->gm->create();
             $this->showAction();
+            return false;
         }
+        $this->render('create');
+    }
+
+    public function updateAction(){
+        if(isset($this->gm->id_genre)){
+            $_SESSION['id_genre'] = $this->gm->id_genre;
+        }
+        if(isset($this->gm->name) && !empty($this->gm->name)){
+            $this->gm->update($_SESSION['id_genre'], 'id_genre');
+            $this->showAction();
+            return false;
+        }
+        $result = $this->gm->find(['WHERE' => 'id_genre = '.$_SESSION['id_genre']]);
+        $this->render('update', ['results' => $result]);
     }
 
     public function deleteAction(){

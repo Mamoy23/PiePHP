@@ -12,9 +12,9 @@
         <tbody>
             @foreach ($results as $result)
             <tr>
-                <td>{{ $result['name'] }}</td>
+                <td>{{ ucfirst(strtolower($result['name'])) }}</td>
                 <td>{{ $result['date'] }}</td>
-                <td>{{ $result['genre'] }}</td>
+                <td>{{ ucfirst(strtolower($result['genre'])) }}</td>
             </tr>
             @endforeach 
         </tbody>

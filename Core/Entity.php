@@ -39,8 +39,9 @@ class Entity {
         return $this->orm->read($this->table, $this->id);
     }
 
-    public function update(){
-        return $this->orm->update($this->table, $this->id, $this->params);
+    public function update($id, $id_name){
+        //var_dump($id, $id_name);
+        return $this->orm->update($this->table, $id, $this->params, $id_name);
     }
 
     public function delete($id, $id_name){
@@ -48,7 +49,11 @@ class Entity {
         return $this->orm->delete($this->table, $id, $id_name);
     }
 
-    public function find(){
+    public function find($params){
+        return $this->orm->find($this->table, $params);
+    }
+
+    public function findAll(){
         return $this->orm->find($this->table, $this->params);
     }
 }

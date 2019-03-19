@@ -15,7 +15,7 @@ class MovieController extends Controller {
     }
 
     public function indexAction(){
-        $result = $this->mm->find();
+        $result = $this->mm->findAll();
         $this->render('index', ['results' => $result]);
     }
 
@@ -39,7 +39,20 @@ class MovieController extends Controller {
     }
 
     public function updateAction(){
-        $this->render('update');
+        //$id_movie = $this->mm->id_movie;
+        if(isset($this->mm->id_movie)){
+            $_SESSION['id_movie'] = $this->mm->id_movie;
+        }
+        if(isset($this->mm->name) && !empty($this->mm->name)
+        && isset($this->mm->genre) && !empty($this->mm->genre)
+        && isset($this->mm->date) && !empty($this->mm->date)){
+            $this->mm->update($_SESSION['id_movie'], 'id_movie');
+            $this->showAction();
+            return false;
+        }
+        $result = $this->mm->find(['WHERE' => 'id_movie = '.$_SESSION['id_movie']]);
+        $genres = $this->mm->getGenres();
+        $this->render('update', ['results' => $result, 'genres' => $genres]);
     }
 
     public function deleteAction(){

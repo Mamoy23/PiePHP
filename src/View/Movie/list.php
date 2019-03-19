@@ -17,16 +17,16 @@
                 @foreach ($results as $result)
                 <tr>
                     <td><input type="checkbox" name="id_movie" value="{{ $result['id_movie'] }}" id="{{ $result['id_movie'] }}"></td>
-                    <td>{{ $result['name'] }}</td>
+                    <td>{{ ucfirst(strtolower($result['name'])) }}</td>
                     <td>{{ $result['date'] }}</td>
-                    <td>{{ $result['genre'] }}</td>
+                    <td>{{ ucfirst(strtolower($result['genre'])) }}</td>
                 </tr>
                 @endforeach
         </tbody>
     </table>
     <button type="submit" class="btn btn-outline-danger">Supprimer ce film</button>
+    <button type="submit" formaction="update" id="update_movie" class="btn btn-outline-secondary">Modifier ce film</button>
     </form>
-    <button id="update_movie" class="btn btn-outline-secondary">Modifier ce film</button>
     @endisset
 
 </div>
