@@ -4,7 +4,7 @@ namespace Core;
 
 class Request{
 
-    public function getParams(){
+    public function getParams() {
         $request = array_merge($_GET, $_POST);
                   
         foreach ($request as &$value){

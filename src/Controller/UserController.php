@@ -6,14 +6,9 @@ use \Model\UserModel;
 
 class UserController extends Controller{
 
-    // protected $request;
-    // protected $params;
     private $um;
 
-    public function __construct(){
-        // $this->request = new \Core\Request;
-        // $this->params = $this->request->getParams();
-        //$this->id = $_SESSION['id'];
+    public function __construct() {
         parent::__construct();
         $this->um = new \Model\UserModel($this->params);
         if(!empty($_SESSION)){
@@ -25,31 +20,25 @@ class UserController extends Controller{
         $this->render('index');
     }
 
-    // public function vueAction(){
-    //     $this->render('register');
-    // }
-    public function addAction(){
-        
-        //if(isset($this->um->check)){
-            if(isset($this->um->email) && !empty($this->um->email)
-            && isset($this->um->password) && !empty($this->um->password)){
-                //$pwd_hash = password_hash($this->um->password, PASSWORD_DEFAULT);
-                //$this->um = new \Model\UserModel($this->params);
-                $this->um->create();
-                $this->render('login');
-                return false;
-            }
-            else{
-                $error = "Merci de remplir tous les champs";
-                $this->render('register', ['error' => $error]);
-                return false;
-            }
-        //}
+    public function vueAction(){
         $this->render('register');
+    }
+
+    public function addAction() {
+        if(isset($this->um->email) && !empty($this->um->email)
+        && isset($this->um->password) && !empty($this->um->password)){
+            $this->um->create();
+            $this->render('login');
+            return false;
+        }
+        else{
+            $error = "Merci de remplir tous les champs";
+            $this->render('register', ['error' => $error]);
+            return false;
+        }
     }
     
     public function loginAction() {
-        
         if(isset($this->um->co_email) && !empty($this->um->co_email)
         && isset($this->um->co_password) && !empty($this->um->co_password)){
             
@@ -70,23 +59,17 @@ class UserController extends Controller{
     }
 
     public function showAction() {
-        //$this->um = new \Model\UserModel($this->params);
-        $user = $this->um->read(); //VOIR COMMENT RECUPERER l'ID SELON LE CAS
+        $user = $this->um->read(); 
     }
 
     public function updateAction() {
-        //var_dump($_SESSION);
-        //$this->render('show', ['email' => $_SESSION['email'] ]);
         if(isset($this->um->email) && !empty($this->um->email)){
             $this->um->update($this->id, 'id_user');
             $user = $this->um->read();
-            //var_dump($user[0]['email']);
             $this->render('show', ['email' => $user[0]['email']]);
         }
         $user = $this->um->read();
         $this->render('show', ['email' => $user[0]['email']]);
-            //$this->um->update($_SESSION['id'], $this->params['up_mail'], $this->params['up_password']);
-        //}
     }
 
     public function deleteAction() {

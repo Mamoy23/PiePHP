@@ -3,7 +3,10 @@ $('document').ready(function(){
         window.location.href = "add";
     });
     $('#signin').click(function(){
-        window.location.href = "/w2php502p1/user/add";
+        window.location.href = "/w2php502p1/user/signin";
+    });
+    $('#signin_button').click(function(){
+        window.location.href = "signin";
     });
     $('#update_movie').click(function(){
         window.location.href = "update";

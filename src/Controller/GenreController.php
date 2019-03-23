@@ -6,29 +6,24 @@ use \Model\GenreModel;
 
 class GenreController extends Controller{
 
-    // protected $request;
-    // protected $params;
     private $gm;
 
-    public function __construct(){
-        // $this->request = new \Core\Request;
-        // $this->params = $this->request->getParams();
-        //$this->id = $_SESSION['id'];
+    public function __construct() {
         parent::__construct();
         $this->gm = new \Model\GenreModel($this->params);
     }
 
-    public function indexAction(){
+    public function indexAction() {
         $results = $this->gm->findAll();
         $this->render('index', ['results' => $results]);
     }
 
-    public function showAction(){
+    public function showAction() {
         $list = $this->gm->read();
         $this->render('list', ['results' => $list]);
     }
 
-    public function addAction(){
+    public function addAction() {
         if(isset($this->gm->name) && !empty($this->gm->name)){
             $this->gm->create();
             $this->showAction();
@@ -37,12 +32,11 @@ class GenreController extends Controller{
         $this->render('create');
     }
 
-    public function updateAction(){
-        //var_dump($this->gm->id_genre);
+    public function updateAction() {
         if(isset($this->gm->id_genre)){
             $_SESSION['id_genre'] = $this->gm->id_genre;
         }
-        if(isset($this->gm->name) && !empty($this->gm->name)){
+        if(isset($this->gm->name) && !empty($this->gm->name)) {
             $this->gm->update($_SESSION['id_genre'], 'id_genre');
             $this->showAction();
             return false;
@@ -51,7 +45,7 @@ class GenreController extends Controller{
         $this->render('update', ['results' => $result]);
     }
 
-    public function deleteAction(){
+    public function deleteAction() {
         if(isset($this->gm->id_genre) && !empty($this->gm->id_genre)){
             $this->gm->delete($this->gm->id_genre,'id_genre');
             $this->showAction();

@@ -10,9 +10,6 @@
 
     <button id="delete_button" class="btn btn-outline-danger m-1">Supprimer mon compte</button>
     <br />
-    <!-- <form action="delete" method="POST">
-        <button type="submit">Supprimer mon compte</button>
-    </form> -->
 
     @if (isset($error))
         <p>{{ $error }}</p>

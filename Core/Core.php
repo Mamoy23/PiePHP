@@ -3,7 +3,6 @@ namespace Core;
 
 class Core {
     public function run() {
-    //echo __CLASS__ . " [OK]" . PHP_EOL;
     
     // ROUTAGE DYNAMIQUE
         // $exp = explode('/', $_SERVER['REQUEST_URI']);
@@ -37,8 +36,7 @@ class Core {
         require_once 'routes.php';
 
         $url = substr($_SERVER['REQUEST_URI'], 11);
-        //$routes = Router::get($url);
-        //var_dump($routes[$url]);
+
         if($routes = Router::get($url)){
             $className = 'Controller\\'.ucfirst($routes['controller']).'Controller';
             $methodName = $routes['action'].'Action';

@@ -21,18 +21,10 @@ class Controller{
         $f = str_replace('Controller', '', $f);
         
         if (file_exists($f)) {
-
             ob_start();
-            // $oldcontent = file_get_contents($f);
             $obj = new TemplateEngine();
             $obj->parse($f);
-            //echo $newcontent;
-            //file_put_contents($f, $newcontent);
-            //echo $oldcontent;
-            //file_put_contents($f, $oldcontent);
-            //file_put_contents('tmp.php', $content);
-            include('tmp.php'); 
-            //include($f);   
+            include('tmp.php');  
             $view = ob_get_clean();
             ob_start();        
             include(implode(DIRECTORY_SEPARATOR, [dirname(__DIR__), 'src', 'View',
@@ -43,8 +35,5 @@ class Controller{
 
     public function __destruct(){
         echo self::$_render;
-        // $obj = new TemplateEngine();
-        // $content = $obj->a();
-        //echo $content;
     }
 }

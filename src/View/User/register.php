@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html>
 <div class="container">
     <h1 class="text-dark text-center m-4">Inscription</h1>
     <form action="add" method="POST" class="form-group m-1">

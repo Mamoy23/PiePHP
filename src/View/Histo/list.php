@@ -32,5 +32,4 @@
         <p class="m-2">Cliquez juste au dessus pour ajouter votre premier film!</p>
     @end!empty
     @endisset
-
 </div>

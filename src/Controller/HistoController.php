@@ -8,12 +8,12 @@ class HistoController extends Controller{
 
     private $hm;
 
-    public function __construct(){
+    public function __construct() {
         parent::__construct();
         $this->hm = new \Model\HistoModel($this->params);
     }
 
-    public function showAction(){
+    public function showAction() {
         $results = $this->hm->read();
         $movies = [];
         foreach($results as $key => $result){
@@ -23,7 +23,7 @@ class HistoController extends Controller{
         $this->render('list', ['results' => $movies]);
     }
 
-    public function addAction(){
+    public function addAction() {
         if(isset($this->hm->id_movie) && !empty($this->hm->id_movie)){
             $this->hm->create();
             $this->showAction();

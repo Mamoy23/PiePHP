@@ -5,10 +5,6 @@ namespace Model;
 use \Core\Entity;
 
 class MovieModel extends Entity {
-    //protected $table = 'movies';
-    // public function __construct(){
-    //     $this->id = $this->mm->id_film;
-    // }
 
     public function getGenres(){
         $bdd = $this->orm->readByMail();
